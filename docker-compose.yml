@@ -1,0 +1,39 @@
+services:
+  server:
+    container_name: ${SERVER_HOST}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - ${HOST_SERVER_PORT}:${CONTAINER_SERVER_PORT}
+    depends_on:
+      - db
+    networks:
+      - vue-net
+
+  db:
+    container_name: ${DB_HOST}
+    image: mariadb:10.4
+    restart: always
+    environment:
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${DB_NAME}
+    volumes:
+      - dbdata:/var/lib/mariadb/data/
+    ports:
+      - ${HOST_DB_PORT}:${DB_PORT}
+    networks:
+      - vue-net
+
+networks:
+  vue-net:
+    name: vue-net
+    driver: bridge
+
+volumes:
+  dbdata:
