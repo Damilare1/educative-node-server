@@ -1,100 +1,88 @@
-const InputTypes = require("../models/survey_input_types.model");
+const InputTypes = require('../models/survey_input_types.model')
 
 // Create and Save a new input type
-exports.create = (req, res) => {
-  // Create a input type
-  const inputTypes = {
+exports.create = async (req, res) => {
+  const inputType = {
     label: req.body.label,
-  };
-
-  // Save input type in the database
-  InputTypes.create(inputTypes)
-    .then(data => {
-      res.send(data);
+  }
+  try {
+    const data = await InputTypes.create(inputType)
+    res.send(data)
+  } catch (err) {
+    res.status(500).send({
+      message:
+        err.message || 'Some error occurred while creating the input type.',
     })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the input type."
-      });
-    });
-};
+  }
+}
 
 // Retrieve all input types from the database
-exports.findAll = (req, res) => {
-  InputTypes.findAll()
-    .then(data => {
-      res.send(data);
+exports.findAll = async (_, res) => {
+  try {
+    const data = await InputTypes.findAll()
+    res.send(data)
+  } catch (err) {
+    res.status(500).send({
+      message:
+        err.message || 'Some error occurred while retrieving input type.',
     })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving input type."
-      });
-    });
-};
+  }
+}
 
 // Retrieve a particular input type from the database
-exports.findById = (req, res) => {
-  const id = req.params.id;
-  InputTypes.findByPk(id)
-    .then(data => {
-      res.send(data);
+exports.findById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const data = await InputTypes.findByPk(id)
+    res.send(data)
+  } catch (err) {
+    res.status(500).send({
+      message:
+        err.message || 'Some error occurred while retrieving input type.',
     })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving input type."
-      });
-    });
-};
+  }
+}
 
 // Update a input type by the id in the request
-exports.update = (req, res) => {
-  const id = req.params.id;
-
-  InputTypes.update(req.body, {
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "input type was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update input type with id=${id}. Maybe input type was not found or req.body is empty!`
-        });
-      }
+exports.update = async (req, res) => {
+  try {
+    const id = req.params.id
+    const status = await InputTypes.update(req.body, {
+      where: { id: id },
     })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating input type with id=" + id
-      });
-    });
-};
+    const data = {
+      message:
+        status === 1
+          ? 'input type was updated successfully.'
+          : `Cannot update input type with id=${id}. Maybe input type was not found or req.body is empty!`,
+    }
+    res.send(data)
+  } catch (err) {
+    res.status(500).send({
+      message: `Error updating input type with id=${id}`,
+    })
+  }
+}
 
 // Delete a input type with the specified id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id;
+exports.delete = async (req, res) => {
+  const id = req.params.id
 
-  InputTypes.destroy({
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "input type was deleted successfully!"
-        });
-      } else {
-        res.send({
-          message: `Cannot delete input type with id=${id}. Maybe input type was not found!`
-        });
-      }
+  try {
+    const id = req.params.id
+    const status = await InputTypes.destroy(req.body, {
+      where: { id: id },
     })
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not delete input type with id=" + id
-      });
-    });
-};
+    const data = {
+      message:
+        status === 1
+          ? 'input type was deleted successfully.'
+          : `Cannot delete input type with id=${id}. Maybe input type was not found!`,
+    }
+    res.send(data)
+  } catch (err) {
+    res.status(500).send({
+      message: `Could not delete input type with id=${id}`,
+    })
+  }
+}
