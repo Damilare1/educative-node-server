@@ -11,7 +11,7 @@ exports.create = async (req, res) => {
   }
   try {
     const data = await Questions.create(question)
-    res.send(data)
+    res.status(201).send(data)
   } catch (err) {
     res.status(500).send({
       message:

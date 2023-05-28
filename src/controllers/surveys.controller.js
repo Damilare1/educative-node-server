@@ -13,8 +13,11 @@ exports.create = async (req, res) => {
     end_date: req.body.end_date,
   }
   try {
+    const user = req.user;
+    survey.admin_id = user.admin_id;
     const data = await Surveys.create(survey)
-    res.send(data)
+    const { survey_name, survey_description, is_active, start_date, end_date } = data
+    res.send({ survey_name, survey_description, is_active, start_date, end_date })
   } catch (err) {
     res.status(500).send({
       message: err.message || 'Some error occurred while creating the survey.',
@@ -26,6 +29,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (_, res) => {
   try {
     const data = await Surveys.findAll()
+    console.log(_.session.id)
     res.send(data)
   } catch (err) {
     res.status(500).send({
@@ -56,7 +60,7 @@ exports.findAllSurveyQuestionsBySurveyId = async (req, res) => {
 }
 
 // Retrieve a particular Survey from the database
-exports.findById = async (_, res) => {
+exports.findById = async (req, res) => {
   try {
     const id = req.params.id
     const data = await Surveys.findByPk(id)
@@ -91,8 +95,8 @@ exports.update = async (req, res) => {
 
 // Delete a survey with the specified id in the request
 exports.delete = async (req, res) => {
+  const id = req.params.id;
   try {
-    const id = req.params.id
     const status = await Surveys.destroy({
       where: { id: id },
     })

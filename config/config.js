@@ -11,5 +11,7 @@ const dbConfig = {
 const config = {}
 
 config.db = dbConfig;
+config.jwt_secret = process.env.JWT_SECRET;
+config.session_secret = process.env.SESSION_SECRET;
 
 module.exports = config;

@@ -11,6 +11,7 @@ exports.up = function(knex) {
         table.tinyint('is_active') // this is a column.
         table.date('start_date') // this is a column.
         table.date('end_date') // this is a column.
+        table.integer('admin_id').unsigned().references('id').inTable('survey_admins');
     }) 
 };
 

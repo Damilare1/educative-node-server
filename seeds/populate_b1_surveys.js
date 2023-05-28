@@ -14,6 +14,7 @@ exports.seed = async function (knex) {
       is_active: 1,
       start_date: '2022-03-01',
       end_date: '2022-03-31',
+      admin_id: 1,
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ exports.seed = async function (knex) {
       is_active: 1,
       start_date: '2022-04-01',
       end_date: '2022-04-30',
+      admin_id: 2,
     },
   ])
 }

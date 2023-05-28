@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
   }
   try {
     const data = await Options.create(option)
-    res.send(data)
+    res.status(201).send(data)
   } catch (err) {
     res.status(500).send({
       message: err.message || 'Some error occurred while creating the option.',
