@@ -36,7 +36,15 @@ Survey.hasMany(Question, {
   foreignKey: "survey_id",
   targetKey: "id",
 });
-Question.belongsTo(Survey, { foreignKey: "survey_id", targetKey: "id" });
-Survey.belongsTo(Admin, {foreignKey: 'admin_id', targetKey: 'id'});
+Question.belongsTo(Survey, {
+  foreignKey: "survey_id",
+  targetKey: "id",
+  onDelete: "CASCADE",
+});
+Survey.belongsTo(Admin, {
+  foreignKey: "admin_id",
+  targetKey: "id",
+  onDelete: "CASCADE",
+});
 
 module.exports = Survey;

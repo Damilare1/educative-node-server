@@ -6,8 +6,8 @@ module.exports = (app) => {
   // Create a new Survey
   router.post("/", auth, surveys.create);
 
-  // Retrieve all Survey
-  // router.get("/", surveys.findAll);
+  // Retrieve all Surveys for logged in user
+  router.get("/", auth, surveys.findLoggedInUserSurveys);
 
   // Retrieve Survey by id
   router.get("/:id", surveys.findById);

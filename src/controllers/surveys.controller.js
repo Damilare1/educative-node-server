@@ -1,7 +1,7 @@
-const Surveys = require('../models/survey.model')
-const InputTypes = require('../models/survey_input_types.model')
-const Options = require('../models/survey_options.model')
-const Responses = require('../models/survey_responses.model')
+const Surveys = require("../models/survey.model");
+const InputTypes = require("../models/survey_input_types.model");
+const Options = require("../models/survey_options.model");
+const Responses = require("../models/survey_responses.model");
 
 // Create and Save a new Survey
 exports.create = async (req, res) => {
@@ -11,87 +11,94 @@ exports.create = async (req, res) => {
     is_active: +req.body.is_active,
     start_date: req.body.start_date,
     end_date: req.body.end_date,
-  }
+  };
   try {
     const user = req.user;
     survey.admin_id = user.admin_id;
-    const data = await Surveys.create(survey)
-    const { survey_name, survey_description, is_active, start_date, end_date } = data
-    res.send({ survey_name, survey_description, is_active, start_date, end_date })
+    const data = await Surveys.create(survey);
+    const { survey_name, survey_description, is_active, start_date, end_date } =
+      data;
+    res.send({
+      survey_name,
+      survey_description,
+      is_active,
+      start_date,
+      end_date,
+    });
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while creating the survey.',
-    })
+      message: err.message || "Some error occurred while creating the survey.",
+    });
   }
-}
+};
 
 // Retrieve all Surveys from the database
 exports.findAll = async (_, res) => {
   try {
-    const data = await Surveys.findAll()
-    console.log(_.session.id)
-    res.send(data)
+    const data = await Surveys.findAll();
+    console.log(_.session.id);
+    res.send(data);
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while retrieving survey.',
-    })
+      message: err.message || "Some error occurred while retrieving survey.",
+    });
   }
-}
+};
 
 // Retrieve all Questions for a Particular survey from the database
 exports.findAllSurveyQuestionsBySurveyId = async (req, res) => {
   try {
-    const id = req.params.id
-    const survey = await Surveys.findByPk(id)
-    if (!survey) throw new Error(`Survey with id: ${id} does not exist`)
+    const id = req.params.id;
+    const survey = await Surveys.findByPk(id);
+    if (!survey) throw new Error(`Survey with id: ${id} does not exist`);
     const question = await survey.getQuestions({
-      attributes: ['id', 'question'],
+      attributes: ["id", "question"],
       include: {
         model: InputTypes,
       },
-    })
-    const data = survey.get()
-    res.send({ ...data, questions: question })
+    });
+    const data = survey.get();
+    res.send({ ...data, questions: question });
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while retrieving survey.',
-    })
+      message: err.message || "Some error occurred while retrieving survey.",
+    });
   }
-}
+};
 
 // Retrieve a particular Survey from the database
 exports.findById = async (req, res) => {
   try {
-    const id = req.params.id
-    const data = await Surveys.findByPk(id)
-    res.send(data)
+    const id = req.params.id;
+    const data = await Surveys.findByPk(id);
+    res.send(data);
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while retrieving survey.',
-    })
+      message: err.message || "Some error occurred while retrieving survey.",
+    });
   }
-}
+};
 
 // Update a survey by the id in the request
 exports.update = async (req, res) => {
   try {
-    const id = req.params.id
+    const id = req.params.id;
     const status = await Surveys.update(req.body, {
       where: { id: id },
-    })
+    });
     const data = {
       message:
         status === 1
-          ? 'Survey was updated successfully.'
+          ? "Survey was updated successfully."
           : `Cannot update Survey with id=${id}. Maybe Survey was not found or req.body is empty!`,
-    }
-    res.send(data)
+    };
+    res.send(data);
   } catch (err) {
     res.status(500).send({
       message: `Error updating Survey with id=${id}`,
-    })
+    });
   }
-}
+};
 
 // Delete a survey with the specified id in the request
 exports.delete = async (req, res) => {
@@ -99,46 +106,70 @@ exports.delete = async (req, res) => {
   try {
     const status = await Surveys.destroy({
       where: { id: id },
-    })
+    });
     const data = {
       message:
         status === 1
-          ? 'Survey was deleted successfully!'
+          ? "Survey was deleted successfully!"
           : `Cannot delete Survey with id=${id}. Maybe Survey was not found!`,
-    }
-    res.send(data)
+    };
+    res.send(data);
   } catch (err) {
     res.status(500).send({
       message: `Could not delete Survey with id=${id}`,
-    })
+    });
   }
-}
+};
 
 // Retrieve a particular response from the database
 exports.findQuestionResponsesBySurveyId = async (req, res) => {
   try {
-    const id = req.params.id
-    const survey = await Surveys.findByPk(id)
-    if (!survey) throw new Error(`Survey with id: ${id} does not exist`)
+    const id = req.params.id;
+    const survey = await Surveys.findByPk(id);
+    if (!survey) throw new Error(`Survey with id: ${id} does not exist`);
     const question = await survey.getQuestions({
-      attributes: ['id', 'question'],
+      attributes: ["id", "question"],
       include: [
         {
           model: Responses,
-          attributes: ['id'],
+          attributes: ["id"],
           include: {
             model: Options,
-            attributes: ['id', 'label'],
+            attributes: ["id", "label"],
           },
-          as: 'Responses',
+          as: "Responses",
         },
       ],
-    })
-    const data = survey.get()
-    res.send({ ...data, questions: question })
+    });
+    const data = survey.get();
+    res.send({ ...data, questions: question });
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Some error occurred while retrieving survey.',
-    })
+      message: err.message || "Some error occurred while retrieving survey.",
+    });
   }
-}
+};
+
+// Retrieve surveys created by logged in user
+exports.findLoggedInUserSurveys = async (req, res) => {
+  try {
+    const { admin_id } = req.user;
+    const data = await Surveys.findAll({
+      where: {
+        admin_id,
+      },
+      attributes: [
+        "survey_name",
+        "survey_description",
+        "is_active",
+        "start_date",
+        "end_date",
+      ],
+    });
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while retrieving surveys.",
+    });
+  }
+};

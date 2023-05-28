@@ -1,7 +1,7 @@
-const { sequelize, Sequelize } = require('../../config/db')
-const Option = require('./survey_options.model')
+const { sequelize, Sequelize } = require("../../config/db");
+const Option = require("./survey_options.model");
 
-const Response = sequelize.define('survey_response', {
+const Response = sequelize.define("survey_response", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -10,10 +10,14 @@ const Response = sequelize.define('survey_response', {
     type: Sequelize.INTEGER,
     references: {
       model: Option,
-      key: 'id',
+      key: "id",
     },
   },
-})
-Response.belongsTo(Option, {foreignKey: 'option_id', targetKey: 'id'});
+});
+Response.belongsTo(Option, {
+  foreignKey: "option_id",
+  targetKey: "id",
+  onDelete: "SET NULL",
+});
 
-module.exports = Response
+module.exports = Response;
