@@ -17,6 +17,7 @@ InputType.hasMany(Question, {
   targetKey: "id",
 });
 Question.belongsTo(InputType, {
+  as: "input_type",
   foreignKey: "input_type_id",
   targetKey: "id",
   onDelete: "SET NULL",

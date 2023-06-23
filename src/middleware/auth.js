@@ -4,7 +4,6 @@ const config = require('../../config/config');
 function authenticateToken(req, res, next) {
   // Get the token from the request authorization header
   const token = req.headers['authorization'];
-
   if (!token) {
     return res.status(401).json({ message: 'No token provided' });
   }

@@ -32,7 +32,7 @@ Responses.belongsTo(Question, {
 });
 
 Question.hasMany(Option, {
-  as: "Options",
+  as: "options",
   foreignKey: "question_id",
   targetKey: "id",
 });

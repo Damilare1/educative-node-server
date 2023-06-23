@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt update && apt install -y nodejs npm git
+RUN apt update && apt install -y curl nodejs npm git
 
 # set working directory
 WORKDIR /app
@@ -8,6 +8,9 @@ WORKDIR /app
 # install app dependencies
 COPY package.json /app/package.json
 RUN npm install
+RUN npm cache clean -f
+RUN npm install -g n
+RUN n stable
 RUN npm install -g knex
 
 # make migration script executable in the container environment

@@ -10,5 +10,5 @@ const sequelize = new Sequelize(dbConfig.DB_NAME, dbConfig.DB_USER, dbConfig.DB_
   }
 });
 
-const db = { sequelize, Sequelize };
+const db = { sequelize, Sequelize, ValidationError: Sequelize.ValidationError };
 module.exports = db;
