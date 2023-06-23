@@ -1,7 +1,7 @@
-const InputTypes = require("../models/survey_input_types.model");
+import InputTypes from "../models/survey_input_types.model.js";
 
 // Create and Save a new input type
-exports.create = async ({ body }) => {
+export const create = async ({ body }) => {
   const inputType = {
     label: body.label,
   };
@@ -20,7 +20,7 @@ exports.create = async ({ body }) => {
 };
 
 // Retrieve all input types from the database
-exports.findAll = async () => {
+export const findAll = async () => {
   try {
     const data = await InputTypes.findAll();
     return { body: data, code: 200 };
@@ -36,7 +36,7 @@ exports.findAll = async () => {
 };
 
 // Retrieve a particular input type from the database
-exports.findById = async ({ id }) => {
+export const findById = async ({ id }) => {
   // id = req.params.id
   try {
     const data = await InputTypes.findByPk(id);
@@ -53,7 +53,7 @@ exports.findById = async ({ id }) => {
 };
 
 // Update a input type by the id in the request
-exports.update = async ({ id }) => {
+export const update = async ({ id }) => {
   try {
     // const id = req.params.id;
     const status = await InputTypes.update(req.body, {
@@ -77,7 +77,7 @@ exports.update = async ({ id }) => {
 };
 
 // Delete a input type with the specified id in the request
-exports.delete = async ({ id }) => {
+export const deleteFn = async ({ id }) => {
   // const id = req.params.id;
 
   try {

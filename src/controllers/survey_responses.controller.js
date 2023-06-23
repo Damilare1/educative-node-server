@@ -1,10 +1,10 @@
-const Responses = require("../models/survey_responses.model");
-const Surveys = require("../models/survey.model");
-const Options = require("../models/survey_options.model");
-const Questions = require("../models/survey_questions.model");
+import Responses from "../models/survey_responses.model.js";
+import Surveys from "../models/survey.model.js";
+import Options from "../models/survey_options.model.js";
+import Questions from "../models/survey_questions.model.js";
 
 // Create and Save a new response
-exports.create = async ({ body }) => {
+export const create = async ({ body }) => {
   const { question_id, survey_id, input_type_id, option_id } = body;
   const response = {
     question_id,
@@ -27,11 +27,14 @@ exports.create = async ({ body }) => {
 };
 
 // Retrieve all responses from the database
-exports.findAll = async (_, res) => {
+export const findAll = async (_, res) => {
   try {
     const data = await Responses.findAll({
       attributes: ["id"],
       include: [
+        { 
+          model: Questions
+        },
         {
           model: Options,
         },
@@ -50,7 +53,7 @@ exports.findAll = async (_, res) => {
 };
 
 // Retrieve a particular response from the database
-exports.findById = async (_, res) => {
+export const findById = async (_, res) => {
   try {
     const id = req.params.id;
     const data = await Responses.findByPk(id, {
@@ -80,7 +83,7 @@ exports.findById = async (_, res) => {
 };
 
 // Update a response by the id in the request
-exports.update = async (req, res) => {
+export const update = async (req, res) => {
   try {
     const id = req.params.id;
     const status = await Responses.update(req.body, {
@@ -104,7 +107,7 @@ exports.update = async (req, res) => {
 };
 
 // Delete a response with the specified id in the request
-exports.delete = async (req, res) => {
+export const deleteFn = async (req, res) => {
   try {
     const id = req.params.id;
     const status = await Responses.destroy({

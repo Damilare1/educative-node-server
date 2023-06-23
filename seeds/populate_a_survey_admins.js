@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.seed = function (knex) {
+export const seed = function (knex) {
   // Deletes ALL existing entries in the users table
   return knex("survey_admins")
     .del()

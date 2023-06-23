@@ -1,6 +1,6 @@
-const {
+import {
   findAllSurveyQuestionsBySurveyId,
-} = require("../../../controllers/surveys.controller");
+} from "../../../controllers/surveys.controller.js";
 async function get(req, res) {
   const response = await findAllSurveyQuestionsBySurveyId({
     id: req.params.id,
@@ -28,4 +28,4 @@ get.apiDoc = {
   },
 };
 
-module.exports = { GET: [get] };
+export default { GET: get };

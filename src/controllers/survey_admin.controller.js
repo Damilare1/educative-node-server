@@ -1,15 +1,15 @@
-const bcrypt = require("bcrypt");
-const config = require("../../config/config");
-const Admin = require("../models/survey_admin.model");
-const jwt = require("jsonwebtoken");
-const { ValidationError } = require("../../config/db");
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { jwt_secret } from '../../config/config.js';
+import Admin from '../models/survey_admin.model.js'
+import { ValidationError } from 'sequelize'
 
 const saltRounds = 10; // Number of salt rounds for bcrypt
 const keyTypeErrorMapper = {
   not_unique: "already exists",
 };
 // Login method
-const login = async ({ email, password, sessionId }) => {
+export const login = async ({ email, password, sessionId }) => {
   try {
     const admin = await Admin.findOne({ where: { email } });
 
@@ -26,7 +26,7 @@ const login = async ({ email, password, sessionId }) => {
     if (isPasswordValid && admin) {
       const token = jwt.sign(
         { admin_id: admin.id, session: sessionId },
-        config.jwt_secret,
+        jwt_secret,
         {
           expiresIn: "2h",
         }
@@ -44,7 +44,7 @@ const login = async ({ email, password, sessionId }) => {
 };
 
 // Update method
-const update = async ({ email, username, password }) => {
+export const update = async ({ email, username, password }) => {
   try {
     const admin = await Admin.findOne({ where: { email } });
 
@@ -72,7 +72,7 @@ const update = async ({ email, username, password }) => {
 };
 
 // Signup method
-const signup = async ({ email, username, password }) => {
+export const signup = async ({ email, username, password }) => {
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     await Admin.create({
@@ -102,7 +102,7 @@ const signup = async ({ email, username, password }) => {
 };
 
 // Get user method
-const getuser = async ({ admin_id }) => {
+export const getuser = async ({ admin_id }) => {
   try {
     const { username, id } = await Admin.findByPk(admin_id);
 
@@ -113,5 +113,3 @@ const getuser = async ({ admin_id }) => {
     return { error: { message: "Internal server error" }, code: 500 };
   }
 };
-
-module.exports = { login, update, signup, getuser };

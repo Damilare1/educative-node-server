@@ -1,5 +1,5 @@
-const { create } = require("../../controllers/survey_responses.controller");
-const authenticateToken = require("../../middleware/auth");
+import { create } from "../../controllers/survey_responses.controller.js";
+import authenticateToken from "../../middleware/auth.js";
 
 async function post(req, res) {
   const response = await create({ body: req.body });
@@ -39,4 +39,4 @@ post.apiDoc = {
   },
 };
 
-module.exports = { POST: [authenticateToken, post] };
+export default { POST: [authenticateToken, post] };

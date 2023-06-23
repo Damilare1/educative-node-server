@@ -1,28 +1,29 @@
-const { sequelize, Sequelize } = require("../../config/db");
-
+import { Sequelize, DataTypes } from "sequelize";
+import { sequelize } from "../../config/db.js";
+import Survey from "./survey.model.js";
 const Admin = sequelize.define(
   "survey_admin",
   {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createdAt: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
     },
@@ -32,4 +33,14 @@ const Admin = sequelize.define(
   }
 );
 
-module.exports = Admin;
+Admin.hasMany(Survey, {
+  as: "Surveys",
+  foreignKey: "admin_id",
+  targetKey: "id",
+})
+Survey.belongsTo(Admin, {
+  foreignKey: "admin_id",
+  targetKey: "id",
+  onDelete: "CASCADE",
+});
+export default Admin;

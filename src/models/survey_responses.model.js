@@ -1,23 +1,12 @@
-const { sequelize, Sequelize } = require("../../config/db");
-const Option = require("./survey_options.model");
+import { DataTypes } from "sequelize";
+import { sequelize } from "../../config/db.js";
 
 const Response = sequelize.define("survey_response", {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-  },
-  option_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Option,
-      key: "id",
-    },
-  },
-});
-Response.belongsTo(Option, {
-  foreignKey: "option_id",
-  targetKey: "id",
-  onDelete: "SET NULL",
+  }
 });
 
-module.exports = Response;
+
+export default Response;

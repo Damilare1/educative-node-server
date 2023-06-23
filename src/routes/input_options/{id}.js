@@ -1,9 +1,9 @@
-const {
-  delete: deleteOption,
+import {
+  deleteFn as deleteOption,
   findById,
   update,
-} = require("../../controllers/survey_options.controller");
-const authenticateToken = require("../../middleware/auth");
+} from "../../controllers/survey_options.controller.js";
+import authenticateToken from "../../middleware/auth.js";
 
 async function get(req, res) {
   const response = await findById({ id: req.params.id });
@@ -111,7 +111,7 @@ deleteFn.apiDoc = {
   },
 };
 
-module.exports = {
+export default {
   GET: [authenticateToken, get],
   DELETE: [authenticateToken, deleteFn],
   PUT: [authenticateToken, put],

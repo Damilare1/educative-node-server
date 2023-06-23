@@ -1,5 +1,4 @@
-const { login } = require("../../controllers/survey_admin.controller.js");
-
+import { login } from '../../controllers/survey_admin.controller.js'
 async function POST(req, res) {
   const response = await login({...req.body, sessionId: req.session.id });
 
@@ -35,4 +34,4 @@ POST.apiDoc = {
   },
 };
 
-module.exports = { POST };
+export default { POST };

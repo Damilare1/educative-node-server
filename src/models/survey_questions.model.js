@@ -1,23 +1,16 @@
-const { sequelize, Sequelize } = require("../../config/db");
-const Survey = require("./survey.model");
-const Responses = require("./survey_responses.model");
-const Option = require("./survey_options.model");
+import { DataTypes } from 'sequelize'
+import { sequelize } from "../../config/db.js";
+import Responses from "./survey_responses.model.js";
+import Option from "./survey_options.model.js";
 
 const Question = sequelize.define("survey_question", {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
   },
   question: {
-    type: Sequelize.STRING,
-  },
-  survey_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Survey,
-      key: "id",
-    },
-  },
+    type: DataTypes.STRING,
+  }
 });
 
 Question.hasMany(Responses, {
@@ -42,4 +35,4 @@ Option.belongsTo(Question, {
   onDelete: "CASCADE",
 });
 
-module.exports = Question;
+export default Question;

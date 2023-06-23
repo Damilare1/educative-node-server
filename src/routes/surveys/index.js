@@ -1,5 +1,5 @@
-const { findAll } = require("../../controllers/surveys.controller");
-const authenticateToken = require("../../middleware/auth");
+import { findAll } from "../../controllers/surveys.controller.js";
+import authenticateToken from "../../middleware/auth.js";
 
 async function get(_, res) {
   const response = await findAll();
@@ -26,4 +26,4 @@ get.apiDoc = {
   },
 };
 
-module.exports = { GET: [authenticateToken, get] };
+export default { GET: [authenticateToken, get] };

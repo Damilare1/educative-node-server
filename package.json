@@ -1,10 +1,11 @@
 {
   "name": "vuejs-refresher-server",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_DEBUG=http,http2 nodemon ./index.js",
+    "start": "nodemon -e js,ejs ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Damilare",

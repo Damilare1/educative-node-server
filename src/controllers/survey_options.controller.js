@@ -1,8 +1,8 @@
-const Options = require("../models/survey_options.model");
-const Questions = require("../models/survey_questions.model");
+import Options from "../models/survey_options.model.js";
+import Questions from "../models/survey_questions.model.js";
 
 // Create and Save a new option
-exports.create = async ({ body }) => {
+export const create = async ({ body }) => {
   const { question_id, label } = body;
   const option = {
     question_id,
@@ -23,7 +23,7 @@ exports.create = async ({ body }) => {
 };
 
 // Retrieve all options from the database
-exports.findAll = async () => {
+export const findAll = async () => {
   try {
     const data = await Options.findAll({
       attributes: ["id", "label"],
@@ -46,7 +46,7 @@ exports.findAll = async () => {
 };
 
 // Retrieve a particular option from the database
-exports.findById = async ({ id }) => {
+export const findById = async ({ id }) => {
   try {
     const data = await Options.findByPk(id, {
       attributes: ["id", "label"],
@@ -69,7 +69,7 @@ exports.findById = async ({ id }) => {
 };
 
 // Update a option by the id in the request
-exports.update = async ({ id, body }) => {
+export const update = async ({ id, body }) => {
   try {
     const status = await Options.update(body, {
       where: { id: id },
@@ -92,7 +92,7 @@ exports.update = async ({ id, body }) => {
 };
 
 // Delete a option with the specified id in the request
-exports.delete = async ({ id, body }) => {
+export const deleteFn = async ({ id, body }) => {
   try {
     const status = await InputTypes.destroy(body, {
       where: { id: id },

@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const config = require('../../config/config');
+import jwt from 'jsonwebtoken'
+import { jwt_secret } from '../../config/config.js';
 
-function authenticateToken(req, res, next) {
+export default function authenticateToken(req, res, next) {
   // Get the token from the request authorization header
   const token = req.headers['authorization'];
   if (!token) {
@@ -9,7 +9,7 @@ function authenticateToken(req, res, next) {
   }
 
   // Verify and decode the token
-  jwt.verify(token, config.jwt_secret, (err, decoded) => {
+  jwt.verify(token, jwt_secret, (err, decoded) => {
     if (err) {
       return res.status(403).json({ message: 'Failed to authenticate token' });
     }
@@ -21,5 +21,3 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-
-module.exports = authenticateToken;

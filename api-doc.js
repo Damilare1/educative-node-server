@@ -1,4 +1,4 @@
-const apiDoc = {
+export default {
   swagger: "2.0",
   basePath: "/",
   info: {
@@ -108,5 +108,3 @@ const apiDoc = {
   },
   paths: {},
 };
-
-module.exports = apiDoc;

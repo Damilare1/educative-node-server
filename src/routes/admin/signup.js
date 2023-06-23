@@ -1,4 +1,4 @@
-const { signup } = require("../../controllers/survey_admin.controller.js");
+import { signup } from "../../controllers/survey_admin.controller.js";
 
 async function POST(req, res) {
   const response = await signup(req.body);
@@ -38,4 +38,4 @@ POST.apiDoc = {
   },
 };
 
-module.exports = { POST };
+export default { POST };

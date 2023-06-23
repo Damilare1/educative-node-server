@@ -1,33 +1,26 @@
-const { sequelize, Sequelize } = require("../../config/db");
-const Question = require("./survey_questions.model");
-const Admin = require("./survey_admin.model");
+import { DataTypes } from "sequelize";
+import { sequelize } from "../../config/db.js";
+import Question from "./survey_questions.model.js";
 
 const Survey = sequelize.define("survey", {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
   },
   survey_name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
   survey_description: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
   is_active: {
-    type: Sequelize.TINYINT,
+    type: DataTypes.TINYINT,
   },
   start_date: {
-    type: Sequelize.DATE,
+    type: DataTypes.DATE,
   },
   end_date: {
-    type: Sequelize.DATE,
-  },
-  admin_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Admin,
-      key: "id",
-    },
+    type: DataTypes.DATE,
   },
 });
 
@@ -41,10 +34,5 @@ Question.belongsTo(Survey, {
   targetKey: "id",
   onDelete: "CASCADE",
 });
-Survey.belongsTo(Admin, {
-  foreignKey: "admin_id",
-  targetKey: "id",
-  onDelete: "CASCADE",
-});
 
-module.exports = Survey;
+export default Survey;

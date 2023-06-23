@@ -1,6 +1,6 @@
-const { create } = require("../../controllers/survey_options.controller");
+import { create } from "../../controllers/survey_options.controller.js";
 
-async function POST(req, res) {
+export async function POST(req, res) {
   const response = await create({ body: req.body });
 
   res.status(response.code).json(response.error ?? response.body);
@@ -38,4 +38,4 @@ POST.apiDoc = {
   },
 };
 
-module.exports = { POST };
+{ POST };

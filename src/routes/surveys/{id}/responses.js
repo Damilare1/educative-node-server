@@ -1,7 +1,7 @@
-const {
+import {
   findQuestionResponsesBySurveyId,
-} = require("../../../controllers/surveys.controller");
-const authenticateToken = require("../../../middleware/auth")
+} from "../../../controllers/surveys.controller.js";
+import authenticateToken from "../../../middleware/auth.js";
 
 async function get(req, res) {
   const response = await findQuestionResponsesBySurveyId({ id: req.params.id });
@@ -36,4 +36,4 @@ get.apiDoc = {
 
 
 
-module.exports = { GET: [authenticateToken, get] };
+export default { GET: [authenticateToken, get] };

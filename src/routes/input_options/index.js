@@ -1,4 +1,4 @@
-const { findAll } = require("../../controllers/survey_options.controller");
+import { findAll } from "../../controllers/survey_options.controller.js";
 
 async function GET(_, res) {
   const response = await findAll();
@@ -25,4 +25,4 @@ GET.apiDoc = {
   },
 };
 
-module.exports = { GET };
+export default { GET };

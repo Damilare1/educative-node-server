@@ -1,4 +1,5 @@
-require('dotenv').config();
+import dotenv from 'dotenv'
+dotenv.config()
 
 const dbConfig = {
     DB_NAME: process.env.DB_NAME,
@@ -8,10 +9,6 @@ const dbConfig = {
     DB_PORT: process.env.DB_PORT
 }
 
-const config = {}
-
-config.db = dbConfig;
-config.jwt_secret = process.env.JWT_SECRET;
-config.session_secret = process.env.SESSION_SECRET;
-
-module.exports = config;
+export const db = dbConfig;
+export const jwt_secret = process.env.JWT_SECRET;
+export const session_secret = process.env.SESSION_SECRET;

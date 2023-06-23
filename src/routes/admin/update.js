@@ -1,5 +1,5 @@
-const { update } = require("../../controllers/survey_admin.controller.js");
-const authenticateToken = require("../../middleware/auth.js");
+import { update } from "../../controllers/survey_admin.controller.js";
+import authenticateToken from "../../middleware/auth.js";
 
 async function put(req, res) {
   const response = await update(req.body);
@@ -45,4 +45,4 @@ put.apiDoc = {
   },
 };
 
-module.exports = { PUT: [authenticateToken, put] };
+export default { PUT: [authenticateToken, put] };

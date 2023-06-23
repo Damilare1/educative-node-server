@@ -1,5 +1,5 @@
-const { getuser } = require("../../controllers/survey_admin.controller.js");
-const authenticateToken = require("../../middleware/auth.js");
+import { getuser } from "../../controllers/survey_admin.controller.js";
+import authenticateToken from "../../middleware/auth.js";
 
 async function get(req, res) {
   const response = await getuser(req.user);
@@ -26,4 +26,4 @@ get.apiDoc = {
   },
 };
 
-module.exports = { GET: [authenticateToken, get] };
+export default { GET: [authenticateToken, get] };

@@ -1,13 +1,14 @@
-const { sequelize, Sequelize } = require("../../config/db");
-const Question = require("./survey_questions.model");
+import { DataTypes } from "sequelize";
+import { sequelize } from "../../config/db.js";
+import Question from "./survey_questions.model.js";
 
 const InputType = sequelize.define("survey_input_type", {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
   },
   label: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   },
 });
 
@@ -23,4 +24,4 @@ Question.belongsTo(InputType, {
   onDelete: "SET NULL",
 });
 
-module.exports = InputType;
+export default InputType;

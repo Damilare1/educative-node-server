@@ -7,11 +7,12 @@ WORKDIR /app
 
 # install app dependencies
 COPY package.json /app/package.json
-RUN npm install
 RUN npm cache clean -f
 RUN npm install -g n
 RUN n stable
 RUN npm install -g knex
+RUN npm install
+
 
 # make migration script executable in the container environment
 COPY runMigrationAndSeed.sh /app/runMigrationAndSeed.sh

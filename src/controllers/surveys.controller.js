@@ -1,10 +1,10 @@
-const Surveys = require("../models/survey.model");
-const InputTypes = require("../models/survey_input_types.model");
-const Options = require("../models/survey_options.model");
-const Responses = require("../models/survey_responses.model");
+import Surveys from "../models/survey.model.js";
+import InputTypes from "../models/survey_input_types.model.js";
+import Options from "../models/survey_options.model.js";
+import Responses from "../models/survey_responses.model.js";
 
 // Create and Save a new Survey
-exports.create = async ({ body, user }) => {
+export const create = async ({ body, user }) => {
   const { survey_name, survey_description, is_active, start_date, end_date } =
     body;
   const survey = {
@@ -40,7 +40,7 @@ exports.create = async ({ body, user }) => {
 };
 
 // Retrieve all Surveys from the database
-exports.findAll = async () => {
+export const findAll = async () => {
   try {
     const data = await Surveys.findAll();
     return { body: data, code: 200 };
@@ -56,7 +56,7 @@ exports.findAll = async () => {
 };
 
 // Retrieve all Questions for a Particular survey from the database
-exports.findAllSurveyQuestionsBySurveyId = async ({ id }) => {
+export const findAllSurveyQuestionsBySurveyId = async ({ id }) => {
   try {
     // const id = req.params.id;
     const survey = await Surveys.findByPk(id);
@@ -90,7 +90,7 @@ exports.findAllSurveyQuestionsBySurveyId = async ({ id }) => {
 };
 
 // Retrieve a particular Survey from the database
-exports.findById = async ({ id }) => {
+export const findById = async ({ id }) => {
   try {
     // const id = req.params.id;
     const data = await Surveys.findByPk(id);
@@ -107,7 +107,7 @@ exports.findById = async ({ id }) => {
 };
 
 // Update a survey by the id in the request
-exports.update = async ({ id, body }) => {
+export const update = async ({ id, body }) => {
   try {
     // const id = req.params.id;
     const status = await Surveys.update(body, {
@@ -131,7 +131,7 @@ exports.update = async ({ id, body }) => {
 };
 
 // Delete a survey with the specified id in the request
-exports.delete = async ({ id }) => {
+export const deleteFn = async ({ id }) => {
   try {
     const status = await Surveys.destroy({
       where: { id: id },
@@ -154,7 +154,7 @@ exports.delete = async ({ id }) => {
 };
 
 // Retrieve a particular response from the database
-exports.findQuestionResponsesBySurveyId = async ({ id }) => {
+export const findQuestionResponsesBySurveyId = async ({ id }) => {
   try {
     // const id = req.params.id;
     const survey = await Surveys.findByPk(id);
@@ -186,7 +186,7 @@ exports.findQuestionResponsesBySurveyId = async ({ id }) => {
 };
 
 // Retrieve surveys created by logged in user
-exports.findLoggedInUserSurveys = async ({ user }) => {
+export const findLoggedInUserSurveys = async ({ user }) => {
   try {
     const { admin_id } = user;
     const data = await Surveys.findAll({

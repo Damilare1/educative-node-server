@@ -1,14 +1,11 @@
-const dbConfig = require('./config').db;
+import { db } from "./config.js"
 
-const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB_NAME, dbConfig.DB_USER, dbConfig.DB_PASSWORD, {
-  host: dbConfig.DB_HOST,
-  port: dbConfig.DB_PORT,
+import { Sequelize } from "sequelize";
+export const sequelize = new Sequelize(db.DB_NAME, db.DB_USER, db.DB_PASSWORD, {
+  host: db.DB_HOST,
+  port: db.DB_PORT,
   dialect: 'mariadb',
   define: {
     timestamps: false
   }
 });
-
-const db = { sequelize, Sequelize, ValidationError: Sequelize.ValidationError };
-module.exports = db;

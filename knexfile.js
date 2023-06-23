@@ -1,17 +1,17 @@
-const dbConfig = require('./config/config').db;
+import { db } from "./config/config.js";
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+export default {
   development: {
     client: 'mysql',
     connection: {
-      host: dbConfig.DB_HOST,
-      port : dbConfig.DB_PORT,
-      user: dbConfig.DB_USER,
-      password: dbConfig.DB_PASSWORD,
-      database : dbConfig.DB_NAME
+      host: db.DB_HOST,
+      port : db.DB_PORT,
+      user: db.DB_USER,
+      password: db.DB_PASSWORD,
+      database : db.DB_NAME
     },
     pool: {
       min: 2,

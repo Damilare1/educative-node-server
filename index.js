@@ -1,10 +1,11 @@
-const express = require("express");
-const { initialize } = require('express-openapi');
-const { serve, setup } = require('swagger-ui-express');
-const config = require("./config/config");
-var cookieParser = require('cookie-parser');
-var session = require('express-session')
-const auth = require('./src/middleware/auth')
+import express from 'express'
+import { initialize } from 'express-openapi'
+import { serve, setup } from 'swagger-ui-express'
+import { session_secret } from './config/config.js'
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
+import ApiDoc from './api-doc.js'
+
 const port = 8003;
 
 var app = express();
@@ -12,7 +13,7 @@ var app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({
-    secret: config.session_secret,
+    secret: session_secret,
     resave: false,
     saveUninitialized: true
 }));
@@ -23,7 +24,7 @@ app.get("/", (_, res) => {
 
 initialize({
   app,
-  apiDoc: require("./api-doc"),
+  apiDoc: ApiDoc,
   paths: './src/routes'
 });
 
