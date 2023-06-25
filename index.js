@@ -5,8 +5,7 @@ import { session_secret } from './config/config.js'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import ApiDoc from './api-doc.js'
-
-const port = 8003;
+import { serverPort as port } from './config/config.js'
 
 var app = express();
 
@@ -25,15 +24,25 @@ app.get("/", (_, res) => {
 initialize({
   app,
   apiDoc: ApiDoc,
-  paths: './src/routes'
+  paths: './src/routes',
+  errorMiddleware: (err, _, res, __) => {
+    res.status(err.status || 500).json(err);
+  },
+  errorTransformer: (err) => {
+    return {
+      message: err.message,
+      location: err.location,
+      field: err.path
+    }
+  },
 });
 
 app.use(
-  "/api-documentation",
+  "/documentation",
   serve,
   setup(null, {
     swaggerOptions: {
-      url: `http://localhost:${port}/api-docs`,
+      url: `http://localhost:${port}/api/api-docs`,
     },
   })
 );

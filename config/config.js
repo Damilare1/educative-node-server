@@ -9,6 +9,7 @@ const dbConfig = {
     DB_PORT: process.env.DB_PORT
 }
 
+export const serverPort = process.env.HOST_SERVER_PORT;
 export const db = dbConfig;
 export const jwt_secret = process.env.JWT_SECRET;
 export const session_secret = process.env.SESSION_SECRET;

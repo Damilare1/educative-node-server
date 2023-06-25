@@ -1,6 +1,6 @@
 export default {
   swagger: "2.0",
-  basePath: "/",
+  basePath: "/api",
   info: {
     title: "Survey Node API",
     version: "1.0.0",
