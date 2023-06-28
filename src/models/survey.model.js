@@ -6,6 +6,8 @@ const Survey = sequelize.define("survey", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
   },
   survey_name: {
     type: DataTypes.STRING,
@@ -22,17 +24,21 @@ const Survey = sequelize.define("survey", {
   end_date: {
     type: DataTypes.DATE,
   },
+  admin_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
 });
 
-Survey.hasMany(Question, {
-  as: "Questions",
+Survey.Question = Survey.hasMany(Question, {
+  as: "questions",
   foreignKey: "survey_id",
   targetKey: "id",
 });
-Question.belongsTo(Survey, {
+Question.Survey = Question.belongsTo(Survey, {
+  onDelete: "CASCADE",
   foreignKey: "survey_id",
   targetKey: "id",
-  onDelete: "CASCADE",
 });
 
 export default Survey;

@@ -2,7 +2,8 @@ import { create } from "../../controllers/surveys.controller.js";
 import authenticateToken from "../../middleware/auth.js";
 
 async function post(req, res) {
-  const response = await create({ body: req.body });
+  const { body, user } = req;
+  const response = await create({ body, user });
 
   res.status(response.code).json(response.error ?? response.body);
 }
@@ -35,6 +36,7 @@ post.apiDoc = {
             type: "boolean",
           },
         },
+        required: ['survey_name','survey_description','is_active']
       },
     },
   ],

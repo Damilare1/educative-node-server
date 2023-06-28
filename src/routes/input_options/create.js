@@ -1,21 +1,22 @@
 import { create } from "../../controllers/survey_options.controller.js";
+import authenticateToken from "../../middleware/auth.js";
 
-export async function POST(req, res) {
+async function post(req, res) {
   const response = await create({ body: req.body });
 
   res.status(response.code).json(response.error ?? response.body);
 }
 
-POST.apiDoc = {
+post.apiDoc = {
   summary: "Get Input option",
   operationId: "createInputOption",
   tags: ["Input Options"],
   parameters: [
     {
-      in: 'header',
-      name: 'authorization',
+      in: "header",
+      name: "authorization",
       required: true,
-      type: 'string',
+      type: "string",
     },
     {
       name: "body",
@@ -28,6 +29,7 @@ POST.apiDoc = {
             type: "string",
           },
         },
+        required: ["label"],
       },
     },
   ],
@@ -38,4 +40,4 @@ POST.apiDoc = {
   },
 };
 
-{ POST };
+export default { POST: [authenticateToken, post] };

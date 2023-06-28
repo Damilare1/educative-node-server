@@ -7,9 +7,15 @@ const Question = sequelize.define("survey_question", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
   },
   question: {
     type: DataTypes.STRING,
+  },
+  admin_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 });
 
@@ -24,12 +30,12 @@ Responses.belongsTo(Question, {
   onDelete: "CASCADE",
 });
 
-Question.hasMany(Option, {
+Question.Option = Question.hasMany(Option, {
   as: "options",
   foreignKey: "question_id",
   targetKey: "id",
 });
-Option.belongsTo(Question, {
+Option.Question = Option.belongsTo(Question, {
   foreignKey: "question_id",
   targetKey: "id",
   onDelete: "CASCADE",

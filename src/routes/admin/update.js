@@ -35,6 +35,7 @@ put.apiDoc = {
             type: "string",
           },
         },
+        required: ['email','password','username']
       },
     },
   ],

@@ -1,8 +1,9 @@
 import { findAll } from "../../controllers/survey_questions.controller.js";
 import authenticateToken from "../../middleware/auth.js";
 
-async function get(_, res) {
-  const response = await findAll();
+async function get(req, res) {
+  const { user } = req;
+  const response = await findAll({ user });
 
   res.status(response.code).json(response.error ?? response.body);
 }

@@ -18,8 +18,12 @@ app.use(session({
 }));
 // simple route
 app.get("/", (_, res) => {
-  res.json({ message: "Welcome to the survey API." });
+  res.redirect('/documentation');
 });
+
+// app.get("/api/api-docs", (_, res) => {
+//   res.json(ApiDoc);
+// });
 
 initialize({
   app,

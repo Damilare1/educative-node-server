@@ -3,12 +3,14 @@ import Surveys from "../models/survey.model.js";
 import InputTypes from "../models/survey_input_types.model.js";
 
 // Create and Save a new question
-export const create = async ({ body }) => {
+export const create = async ({ body, user }) => {
   const { question, survey_id, input_type_id } = body;
+  const { admin_id } = user;
   const payload = {
     question,
     survey_id,
     input_type_id,
+    admin_id,
   };
   try {
     const data = await Questions.create(payload);
@@ -25,14 +27,17 @@ export const create = async ({ body }) => {
 };
 
 // Retrieve all questions from the database
-export const findAll = async () => {
+export const findAll = async ({ users }) => {
   try {
     const data = await Questions.findAll({
-      attributes: ["id", "question", "survey_id"],
+      attributes: ["id", "question", "survey_id", "admin_id"],
+      where: {
+        admin_id: users.admin_id,
+      },
       include: [
         {
           model: InputTypes,
-          as: "input_type"
+          as: "input_type",
         },
       ],
     });
@@ -49,10 +54,13 @@ export const findAll = async () => {
 };
 
 // Retrieve a particular question from the database
-export const findById = async ({ id }) => {
+export const findById = async ({ id, user }) => {
   try {
     const data = await Questions.findByPk(id, {
       attributes: ["id", "question"],
+      where: {
+        admin_id: user.admin_id,
+      },
       include: [
         {
           model: Surveys,
@@ -75,10 +83,10 @@ export const findById = async ({ id }) => {
 };
 
 // Update a question by the id in the request
-export const update = async ({ id }) => {
+export const update = async ({ id, user }) => {
   try {
     const status = await Questions.update(req.body, {
-      where: { id: id },
+      where: { id: id, admin_id: user.admin_id },
     });
     const data = {
       message:
@@ -98,10 +106,10 @@ export const update = async ({ id }) => {
 };
 
 // Delete a question with the specified id in the request
-export const deleteFn = async ({ id }) => {
+export const deleteFn = async ({ id, user }) => {
   try {
     const status = await Questions.destroy({
-      where: { id: id },
+      where: { id: id, admin_id: user.admin_id },
     });
     const data = {
       message:

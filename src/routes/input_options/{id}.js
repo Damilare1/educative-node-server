@@ -76,6 +76,7 @@ put.apiDoc = {
             type: "string",
           },
         },
+        required: ['label']
       },
     },
   ],

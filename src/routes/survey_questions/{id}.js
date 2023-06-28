@@ -6,19 +6,22 @@ import {
 import authenticateToken from "../../middleware/auth.js";
 
 async function get(req, res) {
-  const response = await findById({ id: req.params.id });
+  const { params: { id }, user } = req;
+  const response = await findById({ id, user });
 
   res.status(response.code).json(response.error ?? response.body);
 }
 
 async function put(req, res) {
-  const response = await update({ id: req.params.id, body: req.body });
+  const { params: { id }, body, user } = req;
+  const response = await update({ id, body, user });
 
   res.status(response.code).json(response.error ?? response.body);
 }
 
 async function deleteFn(req, res) {
-  const response = await deleteQuestion({ id: req.params.id });
+  const { params: { id }, user } = req;
+  const response = await deleteQuestion({ id, user });
 
   res.status(response.code).json(response.error ?? response.body);
 }
@@ -76,6 +79,7 @@ put.apiDoc = {
             type: "string",
           },
         },
+        required: ["question"],
       },
     },
   ],

@@ -1,12 +1,17 @@
 import { Sequelize, DataTypes } from "sequelize";
 import { sequelize } from "../../config/db.js";
 import Survey from "./survey.model.js";
+import Question from "./survey_questions.model.js";
+import Response from "./survey_responses.model.js";
+import Option from "./survey_options.model.js";
 const Admin = sequelize.define(
   "survey_admin",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -39,6 +44,26 @@ Admin.hasMany(Survey, {
   targetKey: "id",
 })
 Survey.belongsTo(Admin, {
+  foreignKey: "admin_id",
+  targetKey: "id",
+  onDelete: "CASCADE",
+});
+Admin.hasMany(Question, {
+  as: "Questions",
+  foreignKey: "admin_id",
+  targetKey: "id"
+})
+Question.belongsTo(Admin, {
+  foreignKey: "admin_id",
+  targetKey: "id",
+  onDelete: "CASCADE",
+});
+Admin.hasMany(Option, {
+  as: "Responses",
+  foreignKey: "admin_id",
+  targetKey: "id"
+})
+Option.belongsTo(Admin, {
   foreignKey: "admin_id",
   targetKey: "id",
   onDelete: "CASCADE",

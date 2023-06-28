@@ -29,6 +29,7 @@ post.apiDoc = {
             type: "string",
           },
         },
+        required: ["label"],
       },
     },
   ],
