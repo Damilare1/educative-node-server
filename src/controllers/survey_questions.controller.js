@@ -127,3 +127,24 @@ export const deleteFn = async ({ id, user }) => {
     };
   }
 };
+
+// Delete a question with the specified id in the request
+export const deleteMultiple = async ({ idArr, user }) => {
+  try {
+    await Questions.destroy({
+      where: { id: idArr, admin_id: user.admin_id },
+    });
+    const data = {
+      message: "questions were deleted successfully!"
+    };
+    return { body: data, code: 200 };
+  } catch (err) {
+    console.log(err)
+    return {
+      error: {
+        message: "Error deleting questions",
+      },
+      code: 500,
+    };
+  }
+}

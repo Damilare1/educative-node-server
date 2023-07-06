@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../config/db.js";
 import Question from "./survey_questions.model.js";
+import Response from "./survey_responses.model.js";
 
 const Survey = sequelize.define("survey", {
   id: {
@@ -39,6 +40,16 @@ Question.Survey = Question.belongsTo(Survey, {
   onDelete: "CASCADE",
   foreignKey: "survey_id",
   targetKey: "id",
+});
+Survey.hasMany(Response, {
+  as: "Responses",
+  foreignKey: "survey_id",
+  targetKey: "id",
+});
+Response.belongsTo(Survey, {
+  foreignKey: "survey_id",
+  targetKey: "id",
+  onDelete: "CASCADE",
 });
 
 export default Survey;

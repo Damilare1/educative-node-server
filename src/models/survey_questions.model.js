@@ -34,6 +34,7 @@ Question.Option = Question.hasMany(Option, {
   as: "options",
   foreignKey: "question_id",
   targetKey: "id",
+  onDelete: "CASCADE"
 });
 Option.Question = Option.belongsTo(Question, {
   foreignKey: "question_id",

@@ -95,7 +95,6 @@ put.apiDoc = {
             type: "boolean",
           },
         },
-        required: ["survey_name", "survey_description", "is_active"],
       },
     },
   ],

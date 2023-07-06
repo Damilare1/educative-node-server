@@ -15,7 +15,8 @@ export const up = function (knex) {
       .unsigned()
       .references("id")
       .inTable("survey_admins")
-      .notNullable();
+      .notNullable()
+      .onDelete('CASCADE');
   });
 };
 

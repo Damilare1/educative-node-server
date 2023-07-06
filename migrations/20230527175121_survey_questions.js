@@ -11,13 +11,15 @@ export const up = function (knex) {
       .integer("input_type_id")
       .unsigned()
       .references("id")
-      .inTable("survey_input_types");
+      .inTable("survey_input_types")
+      .onDelete("SET NULL");
     table
       .integer("admin_id")
       .unsigned()
       .references("id")
       .inTable("survey_admins")
-      .notNullable();
+      .notNullable()
+      .onDelete('CASCADE');
   });
 };
 

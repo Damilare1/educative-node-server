@@ -45,6 +45,7 @@ Admin.hasMany(Survey, {
 })
 Survey.belongsTo(Admin, {
   foreignKey: "admin_id",
+  as: "author",
   targetKey: "id",
   onDelete: "CASCADE",
 });

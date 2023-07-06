@@ -89,7 +89,7 @@ export const signup = async ({ email, username, password }) => {
     if (e instanceof ValidationError) {
       const temp = {};
       e.errors.forEach((item) => {
-        key = item.validatorKey;
+        const key = item.validatorKey;
         temp[item.path] = `${item.path} ${keyTypeErrorMapper[key]}`;
       });
       console.log(e.errors);

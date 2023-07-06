@@ -10,12 +10,14 @@ export const up = function (knex) {
       .integer("question_id")
       .unsigned()
       .references("id")
-      .inTable("survey_questions");
+      .inTable("survey_questions")
+      .onDelete("CASCADE");
     table
       .integer("option_id")
       .unsigned()
       .references("id")
-      .inTable("survey_options");
+      .inTable("survey_options")
+      .onDelete("CASCADE");
   });
 };
 

@@ -14,32 +14,31 @@ post.apiDoc = {
   tags: ["Responses"],
   parameters: [
     {
-      in: "header",
-      name: "authorization",
-      required: true,
-      type: "string",
-    },
-    {
       name: "body",
       in: "body",
       required: true,
       schema: {
         type: "object",
         properties: {
-          question_id: {
-            type: "number",
-          },
-          survey_id: {
-            type: "number",
-          },
-          input_type_id: {
-            type: "number",
-          },
-          option_id: {
-            type: "number",
-          },
+          responses: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                survey_id: {
+                  type: "number",
+                },
+                option_id: {
+                  type: "number",
+                },
+                question_id: {
+                  type: "number",
+                }
+              }
+            }
+          }
         },
-        required: ["question_id", "survey_id", "input_type_id", "option_id"],
+        required: ["responses"],
       },
     },
   ],
@@ -50,4 +49,4 @@ post.apiDoc = {
   },
 };
 
-export default { POST: [authenticateToken, post] };
+export default { POST: post };

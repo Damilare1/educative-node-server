@@ -1,9 +1,9 @@
-import { create } from "../../controllers/surveys.controller.js";
+import { createSurveyBulkCreateQuestionsOptions } from "../../controllers/surveys.controller.js";
 import authenticateToken from "../../middleware/auth.js";
 
 async function post(req, res) {
   const { body, user } = req;
-  const response = await create({ body, user });
+  const response = await createSurveyBulkCreateQuestionsOptions({ body, user });
 
   res.status(response.code).json(response.error ?? response.body);
 }
@@ -35,8 +35,44 @@ post.apiDoc = {
           is_active: {
             type: "boolean",
           },
+          questions: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                id: { type: "integer" },
+                question: {
+                  type: "string",
+                },
+                input_type_id: {
+                  type: "integer",
+                },
+                admin_id: {
+                  type: "integer",
+                },
+                options: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      id: { type: "integer" },
+                      label: {
+                        type: "string",
+                      },
+                      question_id: {
+                        type: "integer",
+                      },
+                      admin_id: {
+                        type: "integer",
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
-        required: ['survey_name','survey_description','is_active']
+        required: ['survey_name','survey_description']
       },
     },
   ],

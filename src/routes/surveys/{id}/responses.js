@@ -4,7 +4,7 @@ import {
 import authenticateToken from "../../../middleware/auth.js";
 
 async function get(req, res) {
-  const response = await findQuestionResponsesBySurveyId({ id: req.params.id });
+  const response = await findQuestionResponsesBySurveyId({ id: req.params.id, user: req.user });
 
   res.status(response.code).json(response.error ?? response.body);
 }

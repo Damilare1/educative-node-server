@@ -9,14 +9,16 @@ export const up = function (knex) {
       .integer("question_id")
       .unsigned()
       .references("id")
-      .inTable("survey_questions");
+      .inTable("survey_questions")
+      .onDelete("CASCADE");
     table.string("label", 150);
     table
       .integer("admin_id")
       .unsigned()
       .references("id")
       .inTable("survey_admins")
-      .notNullable();
+      .notNullable()
+      .onDelete('CASCADE');
   });
 };
 

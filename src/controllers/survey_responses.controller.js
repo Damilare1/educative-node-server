@@ -5,15 +5,9 @@ import Questions from "../models/survey_questions.model.js";
 
 // Create and Save a new response
 export const create = async ({ body }) => {
-  const { question_id, survey_id, input_type_id, option_id } = body;
-  const response = {
-    question_id,
-    survey_id,
-    input_type_id,
-    option_id,
-  };
+  const { responses } = body;
   try {
-    const data = await Responses.create(response);
+    const data = await Responses.bulkCreate(responses);
     return { body: data, code: 201 };
   } catch (err) {
     return {
@@ -53,9 +47,9 @@ export const findAll = async (_, res) => {
 };
 
 // Retrieve a particular response from the database
-export const findById = async (_, res) => {
+export const findById = async (req, res) => {
   try {
-    const id = req.params.id;
+    // const id = req.params.id;
     const data = await Responses.findByPk(id, {
       attributes: ["id"],
       include: [
