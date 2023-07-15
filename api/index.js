@@ -20,10 +20,6 @@ app.get("/", (_, res) => {
   res.redirect('/documentation');
 });
 
-// app.get("/api/api-docs", (_, res) => {
-//   res.json(ApiDoc);
-// });
-
 initialize({
   app,
   apiDoc: ApiDoc,
