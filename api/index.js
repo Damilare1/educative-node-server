@@ -15,7 +15,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-// simple route
+
 app.get("/", (_, res) => {
   res.redirect('/documentation');
 });
