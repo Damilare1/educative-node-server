@@ -5,7 +5,7 @@ import { db } from "./config/config.js";
  */
 export default {
   development: {
-    client: 'mysql2',
+    client: db.DB_CLIENT,
     connection: {
       host: db.DB_HOST,
       port : db.DB_PORT,
