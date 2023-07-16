@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken'
 import { jwt_secret } from '../../config/config.js';
 import Admin from '../models/survey_admin.model.js';
 
-export default function authenticateToken(req, res, next) {
+export default function authenticateToken(request, res, next) {
   // Get the token from the request authorization header
-  const token = req.headers['authorization'];
+  const token = request.headers['authorization'];
   if (!token) {
     return res.status(401).json({ message: 'No token provided' });
   }
@@ -18,7 +18,7 @@ export default function authenticateToken(req, res, next) {
     const admin = await Admin.findByPk(decoded.admin_id)
     if(!admin) return res.status(403).json({ message: 'Failed to authenticate token' });
     
-    req.user = decoded;
+    request.user = decoded;
 
     // Continue to the next middleware or route handler
     next();

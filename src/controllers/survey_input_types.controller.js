@@ -37,7 +37,7 @@ export const findAll = async () => {
 
 // Retrieve a particular input type from the database
 export const findById = async ({ id }) => {
-  // id = req.params.id
+  // id = request.params.id
   try {
     const data = await InputTypes.findByPk(id);
     return { body: data, code: 200 };
@@ -55,15 +55,15 @@ export const findById = async ({ id }) => {
 // Update a input type by the id in the request
 export const update = async ({ id }) => {
   try {
-    // const id = req.params.id;
-    const status = await InputTypes.update(req.body, {
+    // const id = request.params.id;
+    const status = await InputTypes.update(request.body, {
       where: { id: id },
     });
     const data = {
       message:
         status === 1
           ? "input type was updated successfully."
-          : `Cannot update input type with id=${id}. Maybe input type was not found or req.body is empty!`,
+          : `Cannot update input type with id=${id}. Maybe input type was not found or request.body is empty!`,
     };
     return { body: data, code: 200 };
   } catch (err) {
@@ -78,7 +78,7 @@ export const update = async ({ id }) => {
 
 // Delete a input type with the specified id in the request
 export const deleteFn = async ({ id }) => {
-  // const id = req.params.id;
+  // const id = request.params.id;
 
   try {
     const status = await InputTypes.destroy({

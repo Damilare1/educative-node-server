@@ -1,0 +1,1267 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Survey Node API",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/login": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Login",
+        "description": "",
+        "operationId": "adminLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful."
+          }
+        }
+      }
+    },
+    "/api/admin/me": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin User",
+        "description": "",
+        "operationId": "adminUser",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is authenticated."
+          }
+        }
+      }
+    },
+    "/api/admin/signup": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Signup",
+        "description": "",
+        "operationId": "adminSignup",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password",
+                "username"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Signup successful."
+          }
+        }
+      }
+    },
+    "/api/admin/update": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Admin Update",
+        "description": "",
+        "operationId": "adminUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email",
+                "password",
+                "username"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful."
+          }
+        }
+      }
+    },
+    "/api/input_options/{id}": {
+      "get": {
+        "tags": [
+          "Input Options"
+        ],
+        "summary": "Get Input Options",
+        "description": "",
+        "operationId": "inputOptions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input option"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Input Options"
+        ],
+        "summary": "Update Input Options",
+        "description": "",
+        "operationId": "updateInputOption",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input option"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Input Options"
+        ],
+        "summary": "Update Input Options",
+        "description": "",
+        "operationId": "updateInputOption",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input option deleted"
+          }
+        }
+      }
+    },
+    "/api/input_options/create": {
+      "post": {
+        "tags": [
+          "Input Options"
+        ],
+        "summary": "Create Input Options",
+        "description": "",
+        "operationId": "createInputOption",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input option"
+          }
+        }
+      }
+    },
+    "/api/input_options/": {
+      "get": {
+        "tags": [
+          "Input Options"
+        ],
+        "summary": "Get Input Options",
+        "description": "",
+        "operationId": "getInputOptions",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input option"
+          }
+        }
+      }
+    },
+    "/api/input_types/{id}": {
+      "get": {
+        "tags": [
+          "Input Types"
+        ],
+        "summary": "Get Input Types",
+        "description": "",
+        "operationId": "inputTypes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input type"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Input Types"
+        ],
+        "summary": "Update Input Types",
+        "description": "",
+        "operationId": "updateInputType",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input type"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Input Types"
+        ],
+        "summary": "Update Input Types",
+        "description": "",
+        "operationId": "updateInputType",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input type deleted"
+          }
+        }
+      }
+    },
+    "/api/input_types/create": {
+      "post": {
+        "tags": [
+          "Input Types"
+        ],
+        "summary": "Create Input Types",
+        "description": "",
+        "operationId": "createInputType",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "label"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input type"
+          }
+        }
+      }
+    },
+    "/api/input_types/": {
+      "get": {
+        "tags": [
+          "Input Types"
+        ],
+        "summary": "Get Input Types",
+        "description": "",
+        "operationId": "getInputTypes",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Input type"
+          }
+        }
+      }
+    },
+    "/api/survey_questions/": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get All Questions",
+        "description": "",
+        "operationId": "getQuestions",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Delete Questions with IDs",
+        "description": "",
+        "operationId": "deleteMultipleQuestions",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "required": [
+                "ids"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions"
+          }
+        }
+      }
+    },
+    "/api/survey_questions/create": {
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Create Question",
+        "description": "",
+        "operationId": "createQuestion",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string"
+                },
+                "survey_id": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "question",
+                "survey_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions"
+          }
+        }
+      }
+    },
+    "/api/survey_questions/{id}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get Question",
+        "description": "",
+        "operationId": "getQuestion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Update Question",
+        "description": "",
+        "operationId": "updateQuestion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "question"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Delete Question",
+        "description": "",
+        "operationId": "deleteQuestion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions"
+          }
+        }
+      }
+    },
+    "/api/survey_responses/": {
+      "get": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Get All Responses",
+        "description": "",
+        "operationId": "getResponses",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responses"
+          }
+        }
+      }
+    },
+    "/api/survey_responses/create": {
+      "post": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Create Responses",
+        "description": "",
+        "operationId": "createResponses",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "responses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "survey_id": {
+                        "type": "number"
+                      },
+                      "option_id": {
+                        "type": "number"
+                      },
+                      "question_id": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "responses"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responses"
+          }
+        }
+      }
+    },
+    "/api/survey_responses/{id}": {
+      "get": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Get Response",
+        "description": "",
+        "operationId": "getResponse",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responses"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Update Response",
+        "description": "",
+        "operationId": "updateResponse",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "response": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "response"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responses"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Responses"
+        ],
+        "summary": "Delete Response",
+        "description": "",
+        "operationId": "deleteResponse",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Responses"
+          }
+        }
+      }
+    },
+    "/api/surveys/": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get All Surveys",
+        "description": "",
+        "operationId": "getSurveys",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Multipurpose endpoint to create or update a survey, its corresponding questions, and options in one operation",
+        "description": "",
+        "operationId": "createOrUpdateSurveys",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "survey_name": {
+                  "type": "string"
+                },
+                "survey_description": {
+                  "type": "string"
+                },
+                "is_active": {
+                  "type": "boolean"
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "question": {
+                        "type": "string"
+                      },
+                      "input_type_id": {
+                        "type": "integer"
+                      },
+                      "admin_id": {
+                        "type": "integer"
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "label": {
+                              "type": "string"
+                            },
+                            "question_id": {
+                              "type": "integer"
+                            },
+                            "admin_id": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "survey_name",
+                "survey_description",
+                "is_active"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/create": {
+      "post": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Multipurpose endpoint to create or update a survey, its corresponding questions, and options in one operation",
+        "description": "",
+        "operationId": "createOrUpdateSurveys",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "survey_name": {
+                  "type": "string"
+                },
+                "survey_description": {
+                  "type": "string"
+                },
+                "is_active": {
+                  "type": "boolean"
+                },
+                "questions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "question": {
+                        "type": "string"
+                      },
+                      "input_type_id": {
+                        "type": "integer"
+                      },
+                      "admin_id": {
+                        "type": "integer"
+                      },
+                      "options": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            },
+                            "label": {
+                              "type": "string"
+                            },
+                            "question_id": {
+                              "type": "integer"
+                            },
+                            "admin_id": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "survey_name",
+                "survey_description"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/admin/": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get All Surveys created by Admin",
+        "description": "",
+        "operationId": "getAdminSurveys",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/admin/{id}": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Single Survey create by Admin",
+        "description": "",
+        "operationId": "getSingleAdminSurvey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/{id}/questions": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Survey Questions",
+        "description": "",
+        "operationId": "getSurveyQuestions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/{id}/responses": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Survey Responses",
+        "description": "",
+        "operationId": "getSurveyResponses",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/{id}/{id}": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Survey",
+        "description": "",
+        "operationId": "getSurvey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Update specific survey",
+        "description": "",
+        "operationId": "updateSurveys",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "survey_name": {
+                  "type": "string"
+                },
+                "survey_description": {
+                  "type": "string"
+                },
+                "is_active": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Delete Survey",
+        "description": "",
+        "operationId": "deleteSurvey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Survey deleted"
+          }
+        }
+      }
+    }
+  }
+}

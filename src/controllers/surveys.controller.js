@@ -153,7 +153,7 @@ export const findSurveyByIdAdmin = async ({ id, user }) => {
 // Retrieve all Questions for a Particular survey from the database
 export const findAllSurveyQuestionsBySurveyId = async ({ id }) => {
   try {
-    // const id = req.params.id;
+    // const id = request.params.id;
     const survey = await Surveys.findByPk(id);
     if (!survey) throw new Error(`Survey with id: ${id} does not exist`);
     const question = await survey.getQuestions({
