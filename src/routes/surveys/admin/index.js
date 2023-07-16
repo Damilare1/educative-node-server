@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from "express"
 import { findAllByAdmin, findSurveyByIdAdmin } from "../../../controllers/surveys.controller.js";
 import authenticateToken from "../../../middleware/auth.js";
 const router = Router();

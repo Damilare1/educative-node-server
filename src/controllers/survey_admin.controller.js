@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { jwt_secret } from '../../config/config.js';
 import Admin from '../models/survey_admin.model.js'
-import { ValidationError } from 'sequelize'
+import sequelize from 'sequelize'
 
 const saltRounds = 10; // Number of salt rounds for bcrypt
 const keyTypeErrorMapper = {
@@ -86,7 +86,7 @@ export const signup = async ({ email, username, password }) => {
     // Successful signup
     return { body: user, code: 201 };
   } catch (e) {
-    if (e instanceof ValidationError) {
+    if (e instanceof sequelize.ValidationError) {
       const temp = {};
       e.errors.forEach((item) => {
         const key = item.validatorKey;

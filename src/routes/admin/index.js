@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from "express"
 import { login, signup, getuser, update } from "../../controllers/survey_admin.controller.js";
 import authenticateToken from "../../middleware/auth.js";
 
