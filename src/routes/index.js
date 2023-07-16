@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from "express"
 import adminRoutes from './admin/index.js'
 import inputOptions from './input_options/index.js'
 import inputTypes from './input_types/index.js'
