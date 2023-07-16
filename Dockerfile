@@ -3,7 +3,6 @@
 # RUN apt update && apt install -y nodejs npm git
 
 # # set working directory
-# WORKDIR /app
 FROM ubuntu:20.04
 RUN  apt -y update && apt -y upgrade &&  apt install git unzip zip wget vim -y
 RUN apt-get update &&\
@@ -18,7 +17,10 @@ apt-get install nodejs -y && npm install -g @vue/cli \
 && unzip awscliv2.zip && ./aws/install
 RUN apt-get install mysql-server -y
 RUN npm install -g knex
+WORKDIR /
 
 COPY / /
 
 RUN chmod +x "/node-sql-only.sh"
+
+CMD [ "/node-sql-only.sh" ]

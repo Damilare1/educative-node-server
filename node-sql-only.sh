@@ -10,7 +10,7 @@ npm install pm2@latest -g >& /dev/null
 cd /node-server && npm install >& /dev/null
 echo "Modules installed"
 
-pm2 start ./index.js --name SurveyApi >& /dev/null
+pm2 start ./index.js --name SurveyApi
 
 # Waiting for the server to start
 printf "\nServer starting...\n"
@@ -28,6 +28,6 @@ do
 
 done
 echo "Running Migrations and adding Seeds"
-./runMigrationAndSeed.sh >& /dev/null
+./runMigrationAndSeed.sh
 echo "Done"
 echo "Server Started"
