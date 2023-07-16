@@ -26,8 +26,8 @@ export const findAll = async (_, res) => {
     const data = await Responses.findAll({
       attributes: ["id"],
       include: [
-        { 
-          model: Questions
+        {
+          model: Questions,
         },
         {
           model: Options,
@@ -47,9 +47,9 @@ export const findAll = async (_, res) => {
 };
 
 // Retrieve a particular response from the database
-export const findById = async (req, res) => {
+export const findById = async (request, res) => {
   try {
-    // const id = req.params.id;
+    // const id = request.params.id;
     const data = await Responses.findByPk(id, {
       attributes: ["id"],
       include: [
@@ -77,17 +77,17 @@ export const findById = async (req, res) => {
 };
 
 // Update a response by the id in the request
-export const update = async (req, res) => {
+export const update = async (request, res) => {
   try {
-    const id = req.params.id;
-    const status = await Responses.update(req.body, {
-      where: { id: id },
+    const id = request.params.id;
+    const status = await Responses.update(request.body, {
+      where: { id: id, admin_id: request.user.admin_id },
     });
     const data = {
       message:
         status === 1
           ? "response was updated successfully."
-          : `Cannot update response with id=${id}. Maybe response was not found or req.body is empty!`,
+          : `Cannot update response with id=${id}. Maybe response was not found or request.body is empty!`,
     };
     return { body: data, code: 200 };
   } catch (err) {
@@ -101,11 +101,11 @@ export const update = async (req, res) => {
 };
 
 // Delete a response with the specified id in the request
-export const deleteFn = async (req, res) => {
+export const deleteFn = async (request) => {
   try {
-    const id = req.params.id;
+    const id = request.params.id;
     const status = await Responses.destroy({
-      where: { id: id },
+      where: { id: id, admin_id: request.user.admin_id },
     });
     const data = {
       message:

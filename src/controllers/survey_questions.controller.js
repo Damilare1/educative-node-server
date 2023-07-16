@@ -85,14 +85,14 @@ export const findById = async ({ id, user }) => {
 // Update a question by the id in the request
 export const update = async ({ id, user }) => {
   try {
-    const status = await Questions.update(req.body, {
+    const status = await Questions.update(request.body, {
       where: { id: id, admin_id: user.admin_id },
     });
     const data = {
       message:
         status === 1
           ? "question was updated successfully."
-          : `Cannot update question with id=${id}. Maybe question was not found or req.body is empty!`,
+          : `Cannot update question with id=${id}. Maybe question was not found or request.body is empty!`,
     };
     return { body: data, code: 200 };
   } catch (err) {

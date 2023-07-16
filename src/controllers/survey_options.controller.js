@@ -78,7 +78,7 @@ export const update = async ({ id, body }) => {
       message:
         status === 1
           ? "option was updated successfully."
-          : `Cannot update option with id=${id}. Maybe option was not found or req.body is empty!`,
+          : `Cannot update option with id=${id}. Maybe option was not found or request.body is empty!`,
     };
     return { body: data, code: 200 };
   } catch (err) {
