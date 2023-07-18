@@ -1,6 +1,6 @@
 import swaggerAutogen from "swagger-autogen";
-
-const outputFile = "./api-doc.js";
+import { apiUrl } from "./config/config.js"
+const outputFile = "./api-doc.json";
 const endpointsFiles = ["./app.js"];
 const doc = {
   swagger: "2.0",
@@ -8,7 +8,8 @@ const doc = {
   info: {
     title: "Survey Node API",
     version: "1.0.0",
-  }
+  },
+  host: apiUrl
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

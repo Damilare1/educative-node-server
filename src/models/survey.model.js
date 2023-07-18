@@ -5,19 +5,20 @@ import Response from "./survey_responses.model.js";
 
 const Survey = sequelize.define("survey", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
     autoIncrement: true,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV4
   },
   survey_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(50),
   },
   survey_description: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(150),
   },
   is_active: {
-    type: DataTypes.TINYINT,
+    type: DataTypes.BOOLEAN,
   },
   start_date: {
     type: DataTypes.DATE,
@@ -26,9 +27,9 @@ const Survey = sequelize.define("survey", {
     type: DataTypes.DATE,
   },
   admin_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 Survey.Question = Survey.hasMany(Question, {
@@ -51,5 +52,7 @@ Response.belongsTo(Survey, {
   targetKey: "id",
   onDelete: "CASCADE",
 });
+
+Survey.sync({ alter: true })
 
 export default Survey;

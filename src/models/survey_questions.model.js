@@ -5,18 +5,18 @@ import Option from "./survey_options.model.js";
 
 const Question = sequelize.define("survey_question", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV4
   },
   question: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(150),
   },
   admin_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 Question.hasMany(Responses, {

@@ -186,8 +186,8 @@ export const findAllSurveyQuestionsBySurveyId = async ({ id }) => {
 
 // Retrieve a particular Survey from the database
 export const findById = async ({ id, user }) => {
+  console.log("here", id)
   try {
-    console.log(id);
     const data = await Surveys.findByPk(id, {
       include: [
         {
@@ -501,7 +501,7 @@ export const findQuestionResponsesBySurveyId = async ({ id, user }) => {
         model: Options,
         attributes: ['label']
       }],
-      group: ["question_id","option_id"],
+      group: ["survey_responses.question_id","survey_responses.option_id","survey_question.id", "survey_option.id"],
     })
 
     const data = {}
@@ -509,7 +509,7 @@ export const findQuestionResponsesBySurveyId = async ({ id, user }) => {
     for(const response of responses) {
       const { question_id, option_id, survey_question, survey_option, count } = response.get({plain: true})
       if( data[question_id] ){
-        data[question_id].count += count,
+        data[question_id].count = Number(count) + Number(data[question_id].count),
         responseCount = data[question_id].count > responseCount ? data[question_id].count : responseCount
         data[question_id].options.push({...survey_option, option_id, question_id, count})
         continue;

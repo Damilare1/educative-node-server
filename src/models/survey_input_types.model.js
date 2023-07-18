@@ -4,13 +4,13 @@ import Question from "./survey_questions.model.js";
 
 const InputType = sequelize.define("survey_input_type", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV4
   },
   label: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(150),
   },
 });
 

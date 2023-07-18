@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "localhost:9004",
   "basePath": "/",
   "schemes": [
     "http"
@@ -869,6 +869,154 @@
         }
       }
     },
+    "/api/surveys/{id}/questions": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Survey Questions",
+        "description": "",
+        "operationId": "getSurveyQuestions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/{id}/responses": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Survey Responses",
+        "description": "",
+        "operationId": "getSurveyResponses",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      }
+    },
+    "/api/surveys/{id}": {
+      "get": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Get Survey",
+        "description": "",
+        "operationId": "getSurvey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Update specific survey",
+        "description": "",
+        "operationId": "updateSurveys",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "survey_name": {
+                  "type": "string"
+                },
+                "survey_description": {
+                  "type": "string"
+                },
+                "is_active": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Surveys"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Surveys"
+        ],
+        "summary": "Delete Survey",
+        "description": "",
+        "operationId": "deleteSurvey",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Survey deleted"
+          }
+        }
+      }
+    },
     "/api/surveys/": {
       "get": {
         "tags": [
@@ -1111,154 +1259,6 @@
         "responses": {
           "200": {
             "description": "Surveys"
-          }
-        }
-      }
-    },
-    "/api/surveys/{id}/questions": {
-      "get": {
-        "tags": [
-          "Surveys"
-        ],
-        "summary": "Get Survey Questions",
-        "description": "",
-        "operationId": "getSurveyQuestions",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Surveys"
-          }
-        }
-      }
-    },
-    "/api/surveys/{id}/responses": {
-      "get": {
-        "tags": [
-          "Surveys"
-        ],
-        "summary": "Get Survey Responses",
-        "description": "",
-        "operationId": "getSurveyResponses",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Surveys"
-          }
-        }
-      }
-    },
-    "/api/surveys/{id}/{id}": {
-      "get": {
-        "tags": [
-          "Surveys"
-        ],
-        "summary": "Get Survey",
-        "description": "",
-        "operationId": "getSurvey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Surveys"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Surveys"
-        ],
-        "summary": "Update specific survey",
-        "description": "",
-        "operationId": "updateSurveys",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "survey_name": {
-                  "type": "string"
-                },
-                "survey_description": {
-                  "type": "string"
-                },
-                "is_active": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Surveys"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Surveys"
-        ],
-        "summary": "Delete Survey",
-        "description": "",
-        "operationId": "deleteSurvey",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "number"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Survey deleted"
           }
         }
       }

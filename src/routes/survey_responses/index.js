@@ -67,7 +67,7 @@ router.post("/create", async (request, res) => {
         description: 'Responses',
     } 
   */
-  const response = await create({ user: request.user });
+  const response = await create({ body: request.body });
 
   res.status(response.code).json(response.error ?? response.body);
 });

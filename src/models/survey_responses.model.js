@@ -1,12 +1,16 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../config/db.js";
 
-const Response = sequelize.define("survey_response", {
+const Response = sequelize.define("survey_responses", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV4
+  },
+  other: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 });
 

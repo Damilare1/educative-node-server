@@ -4,13 +4,13 @@ import Responses from "./survey_responses.model.js";
 
 const Option = sequelize.define('survey_option', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     primaryKey: true,
-    autoIncrement: true,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.UUIDV4
   },
   label: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(150),
   },
   admin_id: {
     type: DataTypes.INTEGER,

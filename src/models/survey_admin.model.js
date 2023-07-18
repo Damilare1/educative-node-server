@@ -8,10 +8,10 @@ const Admin = sequelize.define(
   "survey_admin",
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
+      allowNull: false,
+      defaultValue: DataTypes.UUIDV4
     },
     email: {
       type: DataTypes.STRING,
@@ -69,4 +69,7 @@ Option.belongsTo(Admin, {
   targetKey: "id",
   onDelete: "CASCADE",
 });
+
+Admin.sync({ alter: true })
+
 export default Admin;
