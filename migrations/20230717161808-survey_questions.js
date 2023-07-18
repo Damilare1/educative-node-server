@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.DataTypes.STRING(150),
       },
       input_type_id: {
-        type: Sequelize.DataTypes.UUID,
+        type: Sequelize.DataTypes.INTEGER,
         references: {
           model: {
             tableName: "survey_input_types",

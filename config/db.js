@@ -1,10 +1,12 @@
-import { db } from "./config.js"
+import { env } from "./config.js"
+import database from "./databaseEnvConfig.cjs"
+const db = database[env]
 
 import { Sequelize } from "sequelize";
-export const sequelize = new Sequelize(db.DB_NAME, db.DB_USER, db.DB_PASSWORD, {
-  host: db.DB_HOST,
-  port: db.DB_PORT,
-  dialect: db.DB_DIALECT,
+export const sequelize = new Sequelize(db.database, db.username, db.password, {
+  host: db.host,
+  port: db.port,
+  dialect: db.dialect,
   define: {
     timestamps: false
   }

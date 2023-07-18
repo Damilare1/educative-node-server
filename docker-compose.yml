@@ -14,21 +14,6 @@ services:
     networks:
       - vue-net
 
-  db:
-    container_name: db
-    image: mysql:8.0.33
-    restart: always
-    environment:
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-    volumes:
-      - dbdata:/var/lib/mysql
-    ports:
-      - 33066:3306
-    networks:
-      - vue-net
-  
   pg-db:
     container_name: pg-db
     image: postgres

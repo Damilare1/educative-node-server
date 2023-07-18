@@ -9,6 +9,7 @@ const doc = {
     title: "Survey Node API",
     version: "1.0.0",
   },
+  schemes: ["http", "https"],
   host: apiUrl
 };
 

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const tablename = 'survey_input_types'
+const tablename = "survey_input_types";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add altering commands here.
      *
@@ -12,9 +12,10 @@ module.exports = {
      */
     return await queryInterface.createTable(tablename, {
       id: {
-        type: Sequelize.DataTypes.UUID,        primaryKey: true,
+        type: Sequelize.DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
         allowNull: false,
-        defaultValue: Sequelize.DataTypes.UUIDV4
       },
       label: {
         type: Sequelize.DataTypes.STRING(150),
@@ -22,7 +23,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add reverting commands here.
      *
@@ -30,5 +31,5 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     return await queryInterface.dropTable(tablename);
-  }
+  },
 };
