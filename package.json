@@ -1,5 +1,5 @@
 {
-  "name": "vuejs-refresher-server",
+  "name": "Survey-API-Server",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -10,8 +10,8 @@
     "os": false
   },
   "scripts": {
-    "start": "nodemon -e js,ejs ./index.js",
-    "build": "webpack",
+    "start": "npm run build && nodemon -e js,ejs ./index.js",
+    "build": "npm install && npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && node ./swagger.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Damilare",
